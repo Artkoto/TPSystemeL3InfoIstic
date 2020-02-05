@@ -134,6 +134,7 @@ int main(int argc, char const *argv[])
                     close(tube[0]);
                     close(tube[1]);
                     execv( strcat(PATH, nomDeLaCommande2),param2);
+                    fprintf(stderr, "impossible d'executer la commande\n");
                     kill(getpid(),SIGKILL);
                     break;
 
