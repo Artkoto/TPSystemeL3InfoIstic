@@ -4,17 +4,15 @@ Binômes:
 	KONE Kafongo
 
 	### Instruction :
-	          
-			1)  Veuillez créer deux répertoires "bin" et "obj" à la racine du projet pour le bon fonctionnement du Makefile.
-
-			2) tous compiller : make all
+	        
+			1) Tous compiler : make all
 			   
 
-			3)execution de shell1 : make test_shell1
+			2)  Exécution de shell1 : make test_shell1
 			  
 
-			4)  execution de shell2 : make test_shell2
+			3)  Exécution de shell2 : make test_shell2
 
 
-			5)  execution de shell3 : make test_shell3
+			4)  Exécution de shell3 : make test_shell3
 
