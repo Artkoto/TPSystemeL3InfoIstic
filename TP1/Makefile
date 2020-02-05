@@ -51,7 +51,7 @@ test_shell3 : shell3.o
 	   ./shell3
 
 #
-#executer tous les makefiles
+#compiler tous les fichiers
 #
 all : 
 		make shell1 shell2 shell3
