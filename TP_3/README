@@ -1,0 +1,37 @@
+
+Binômes:
+	AKOTO Yao Arnaud
+	KONE Kafongo
+
+	### Instruction :
+	        
+			1) Tous compiler : make all
+			   
+
+			2)  Exécution de tp3 : make test_tp3
+			  
+
+			3)  Exécution de nettoie : make test_nettoie 
+
+
+
+	### Réponses aux questions : 
+
+	- le  programme tp3 crée un nouveau processus au segment de mémoire à chaque excécution
+
+	- 
+
+	- si on appelle le programme plusieurs fois, les processus créés utiliseront le même segment de mémoire 	
+
+
+
+		###Question 1
+		-Fait
+
+		###Question 2
+
+		- Quand on exécute simultanément le programme dans des fenêtres différentes, on remarque des races conditions, les processus essaient tous d'écrire en même temps et le resultat est illisible  
+
+		###Question 3
+
+		-pour résoudre le problème de la question 2, on utilise les sémaphores
