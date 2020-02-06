@@ -28,6 +28,7 @@ int semId;
 
 int main() {
 
+  //int sémaphore
   semId = semget(KEY, 1, 0666 | IPC_CREAT);
 
   if (semId < 0)
@@ -37,6 +38,7 @@ int main() {
 
   else
   {
+    //Entrer dans la zone mémoire
     if (semop(semId, &down, 1) < 0)
     {
       perror("semop down"); exit(13);
@@ -59,6 +61,7 @@ int main() {
 
         if (shmdt(compteur)<0) { perror("Error shmdt"); exit(1); } // Détacher le segment  mémoire de la clé
 
+          //liberation de la zone mémoire
          if(semop(semId, &up, 1) < 0)
             {
                 perror("semop up"); exit(14);
