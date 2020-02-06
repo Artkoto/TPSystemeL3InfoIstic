@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#include <sys/types.h>
 #include <sys/sem.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <strings.h>
 
-
-#define TAILLE 1024 
+#define TAILLE 1024
 #define KEY 1234
 
 void ecrire_tableau(int *compteur, char *tableau) {
@@ -23,52 +22,50 @@ void ecrire_tableau(int *compteur, char *tableau) {
   }
 }
 
-int main() { 
+struct sembuf down = { 0, -1, SEM_UNDO}; // attente
+struct sembuf up = { 0, +1, SEM_UNDO}; // le execution 
+int semId;
 
-  int id, *compteur;
-  char *tableau; 
-  int semId; 
-  int semOp;
-  int val;
+int main() {
 
-  struct sembuf up = {0,1,0};
-  struct sembuf down = {0,-1,0};
+  semId = semget(KEY, 1, 0666 | IPC_CREAT);
 
-  id = shmget((key_t)KEY,TAILLE+sizeof(int),0600|IPC_CREAT); // Crée la mémoire partagée avec un nouveau segment
-  if (id<0) { perror("Error shmget"); exit(1); } 
+  if (semId < 0)
+  {
+    perror("Erreur de déclaration de semaphore"); exit(11);
+  }
 
-  semId = semget((key_t)KEY, 1, 0600|IPC_CREAT); // Déclaration du tableau de sémaphores 
-  if (semId == -1){perror("Erreur de déclaration"); exit(1);}
+  else
+  {
+    if (semop(semId, &down, 1) < 0)
+    {
+      perror("semop down"); exit(13);
+    }
+    else
+    {
+        int id, *compteur;
+        char *tableau;
 
-  /*val = semctl(semId, 0, GETVAL); // Récup de la valeur du sémaphore 
-  printf("Valeur de sem : %d", val);*/ 
+        id = shmget((key_t)KEY,TAILLE+sizeof(int),0600|IPC_CREAT);// Crée la mémoire partagée avec un nouveau segment
+        if (id<0) { perror("Error shmget"); exit(1); }
 
-  semOp = semop(semId, &up, 1); // libération de la zone critique 
-  if (semOp == -1){perror("Erreur de sortie du sémaphore "); exit(1);}
+        compteur = (int*) shmat(id,0,0);  // Utilser un segment de mémoire partagée 
+        if (compteur==NULL) { perror("Error shmat"); exit(1); }
 
-  /*val = semctl(semId, 0, GETVAL); // Récup de la valeur du sémaphore 
-  printf("Valeur de sem : %d", val);*/
- 
+        tableau = (char *)(compteur + 1);
+        
+        ecrire_tableau(compteur, tableau);
+        printf("%s\n", tableau);
 
-  semOp = semop(semId, &down, 1); // Entrée et blocage de la zone critique 
-  if (semOp == -1){perror("Erreur d'entrée dans le sémaphore "); exit(1);} 
+        if (shmdt(compteur)<0) { perror("Error shmdt"); exit(1); } // Détacher le segment  mémoire de la clé
 
-  compteur = (int*) shmat(id,0,0); // Utilser un segment de mémoire partagée 
-  if (compteur==NULL) { perror("Error shmat"); exit(1); }
+         if(semop(semId, &up, 1) < 0)
+            {
+                perror("semop up"); exit(14);
+            }
 
-  tableau = (char *)(compteur + 1);
-  
-  ecrire_tableau(compteur, tableau);
-  printf("%s\n", tableau);
-
-  semOp = semop(semId, &up, 1); // libération de la zone critique 
-  if (semOp == -1){perror("Erreur de sortie du sémaphore "); exit(1);} 
-
-  //semctl(semId, 0, IPC_RMID);  
-
-
-  if (shmdt(compteur)<0) { perror("Error shmdt"); exit(1); } // Détacher le segment  mémoire de la clé
-  return 0;
-
+        return 0;
+    }
+  }
 }
 

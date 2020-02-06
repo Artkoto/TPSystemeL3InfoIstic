@@ -17,8 +17,8 @@ int main()
     int semId; 
     int semOp;
 
-    struct sembuf up = {0,1,0};
-    struct sembuf down = {0,-1,0};    
+struct sembuf down = { 0, -1, SEM_UNDO}; // attente
+struct sembuf up = { 0, +1, SEM_UNDO}; // le execution 
 
     semId = semget((key_t)KEY, 1, 0600|IPC_CREAT);
      semOp = semop(semId, &up, 1);

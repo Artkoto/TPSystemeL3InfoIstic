@@ -16,13 +16,11 @@ Binômes:
 
 
 	### Réponses aux questions : 
+	- le programme tp3 crée un nouveau processus au segment de mémoire à chaque exécution
 
-	- le  programme tp3 crée un nouveau processus au segment de mémoire à chaque excécution
+	- On n'utilise pas IPC_PRIVATE car il n'y a pas de relation père-fils entre les différents processus crées
 
-	- 
-
-	- si on appelle le programme plusieurs fois, les processus créés utiliseront le même segment de mémoire 	
-
+	- si on appelle le programme plusieurs fois, les processus créés utiliseront le même segment de mémoire
 
 
 		###Question 1
