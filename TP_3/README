@@ -13,7 +13,7 @@ Binômes:
 
 			3)  Exécution de nettoie : make test_nettoie 
 
-			4) Exécution du semaphore : make test_sem 
+			4) Exécution du semaphore : make test_sem (initialisation du sémaphore à 1)
 
 	### Attention !
 
