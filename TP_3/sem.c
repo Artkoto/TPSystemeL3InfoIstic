@@ -19,10 +19,21 @@ int main()
     //struct sembuf down = { 0, -1, 0}; // attente
     struct sembuf up = { 0, +1, 0}; // le execution 
 
-    semId = semget((key_t)KEY, 1, 0600|IPC_CREAT);
-    semop(semId, &up, 1);
+    semId = semget((key_t)KEY, 1, 0600|IPC_CREAT |IPC_EXCL);
+    if (semId != -1)
+    {
+            semop(semId, &up, 1);
 
      printf("création du semaphore :\t%d \t%d\n",semId ,id);
+    }
+
+    else
+    {
+        printf("le semaphore existe deja\n");
+    }
+    
+    
+
 
     return 0;
 }

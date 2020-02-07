@@ -13,12 +13,6 @@ Binômes:
 
 			3)  Exécution de nettoie : make test_nettoie 
 
-			4) Exécution du semaphore : make test_sem (initialisation du sémaphore à 1)
-
-	### Attention !
-
-		Veuillez initialiser le Sémaphore avant l'execution de tp3.
-		
 
 
 	### Réponses aux questions : 
@@ -40,5 +34,5 @@ Binômes:
 
 		###Question 3
 
-		-Pour résoudre le problème de la question 2, on utilise les sémaphores.
-		Cette question était un peu plus complexe car il fallait penser à créer un autre programme pour initialiser le sémaphore à 1.
+		-Pour résoudre le problème de la question 2, nous avons utilisé les sémaphores.
+		Cette question était un peu plus complexe, l'utilisation du paramètre IPC_EXCL dans l'appel de semget qui retourne une erreur (-1) lorsqu'un processus veut avoir accès à l'identifiant du sémaphore après le premier processus. Ce qui permet au premier processus d'initialiser le sémaphore (semaphore à 1).   

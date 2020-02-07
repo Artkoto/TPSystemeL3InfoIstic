@@ -13,8 +13,6 @@ tp3: tp3.o
 nettoie: nettoie.o
 			   gcc -g -o nettoie nettoie.o 
 
-sem: sem.o
-			   gcc -g -o sem sem.o 
 
 #
 # Objets
@@ -25,9 +23,6 @@ tp3.o: tp3.c
 
 nettoie.o: nettoie.c 
 				 gcc $(CFLAGS) nettoie.c -o nettoie.o
-
-sem.o: sem.c 
-				 gcc $(CFLAGS) sem.c -o sem.o
 
 
 #
@@ -48,13 +43,9 @@ test_tp3 : tp3.o
 test_nettoie : nettoie.o
 	   ./nettoie
 
-test_sem : sem.o
-	   ./sem
-
-
 #
 #compiler tous les fichiers
 #
 all : 
-		make tp3  sem nettoie
+		make tp3  nettoie
 
