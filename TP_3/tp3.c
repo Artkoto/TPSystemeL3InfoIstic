@@ -22,14 +22,14 @@ void ecrire_tableau(int *compteur, char *tableau) {
   }
 }
 
-struct sembuf down = { 0, -1, SEM_UNDO}; // attente
-struct sembuf up = { 0, +1, SEM_UNDO}; // le execution 
+struct sembuf down = { 0, -1, 0}; // attente
+struct sembuf up = { 0, +1, 0}; // le execution 
 int semId;
 
 int main() {
 
   //int sémaphore
-  semId = semget(KEY, 1, 0666 | IPC_CREAT);
+  semId = semget(KEY, 1, 0600 | IPC_CREAT);
 
   if (semId < 0)
   {

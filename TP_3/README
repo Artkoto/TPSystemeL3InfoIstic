@@ -3,7 +3,7 @@ Binômes:
 	AKOTO Yao Arnaud
 	KONE Kafongo
 
-	### Instruction :
+	### Indications :
 	        
 			1) Tous compiler : make all
 			   
@@ -13,9 +13,16 @@ Binômes:
 
 			3)  Exécution de nettoie : make test_nettoie 
 
+			4) Exécution du semaphore : make test_sem 
+
+	### Attention !
+
+		Veuillez initialiser le Sémaphore avant l'execution de tp3.
+		
 
 
 	### Réponses aux questions : 
+
 	- le programme tp3 crée un nouveau processus au segment de mémoire à chaque exécution
 
 	- On n'utilise pas IPC_PRIVATE car il n'y a pas de relation père-fils entre les différents processus crées
@@ -24,6 +31,7 @@ Binômes:
 
 
 		###Question 1
+
 		-Fait
 
 		###Question 2
@@ -32,4 +40,5 @@ Binômes:
 
 		###Question 3
 
-		-pour résoudre le problème de la question 2, on utilise les sémaphores
+		-Pour résoudre le problème de la question 2, on utilise les sémaphores.
+		Cette question était un peu plus complexe car il fallait penser à créer un autre programme pour initialiser le sémaphore à 1.

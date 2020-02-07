@@ -15,13 +15,14 @@ int main()
     
     int id = shmget((key_t)KEY,TAILLE+sizeof(int),0600|IPC_CREAT);
     int semId; 
-    int semOp;
 
-struct sembuf down = { 0, -1, SEM_UNDO}; // attente
-struct sembuf up = { 0, +1, SEM_UNDO}; // le execution 
+    //struct sembuf down = { 0, -1, 0}; // attente
+    struct sembuf up = { 0, +1, 0}; // le execution 
 
     semId = semget((key_t)KEY, 1, 0600|IPC_CREAT);
-     semOp = semop(semId, &up, 1);
+    semop(semId, &up, 1);
+
+     printf("création du semaphore :\t%d \t%d\n",semId ,id);
 
     return 0;
 }
