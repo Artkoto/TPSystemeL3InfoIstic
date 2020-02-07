@@ -23,7 +23,7 @@ void ecrire_tableau(int *compteur, char *tableau) {
 }
 
 struct sembuf down = { 0, -1, 0}; // attente
-struct sembuf up = { 0, +1, 0}; // le execution 
+struct sembuf up = { 0, +1, 0}; //  execution du suivant
 int semId;
 
 int main() {
